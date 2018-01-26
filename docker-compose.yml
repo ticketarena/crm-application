@@ -8,15 +8,26 @@ services:
     volumes:
       - ./:/opt/src
   setup:
-    build:
-      context: .
-      dockerfile: Dockerfile.fpm
+    image: crmapplication_php
     volumes:
       - ./:/opt/src
     working_dir: /opt/src
     entrypoint:
       - /opt/src/app/console
-    command: oro:install --timeout 3600 --drop-database --env=prod --user-name=admin --user-firstname=John --user-lastname=Doe --user-password="admin1111" --user-email="johndoe@example.com" --organization-name="Acme" --application-url="http://oro.loc/"
+    command: oro:install --timeout 3600 --drop-database --env=dev --user-name=admin --user-firstname=John --user-lastname=Doe --user-password="admin1111" --user-email="johndoe@example.com" --organization-name="Acme" --application-url="http://oro.loc/"
+    networks:
+      - php
+    depends_on:
+      - db
+    stdin_open: true
+    tty: true
+  console:
+    image: crmapplication_php
+    volumes:
+      - ./:/opt/src
+    working_dir: /opt/src
+    entrypoint:
+      - /opt/src/app/console
     networks:
       - php
     depends_on:
@@ -61,6 +72,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.fpm
+    image: crmapplication_php
     volumes:
       - ./:/opt/src
     networks:
