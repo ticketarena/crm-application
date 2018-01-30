@@ -47,6 +47,7 @@ services:
     depends_on:
       - php
     environment:
+      - APP_ENV=dev
       - CMD_INIT_BEFORE=
       - CMD_INIT_CLEAN=
       - CMD_INIT_INSTALLED=
@@ -80,6 +81,7 @@ services:
     depends_on:
       - db
     environment:
+      - APP_ENV=dev
       - CMD_INIT_BEFORE=
       - CMD_INIT_CLEAN=
       - CMD_INIT_INSTALLED=
