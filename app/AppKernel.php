@@ -32,4 +32,22 @@ class AppKernel extends OroKernel
     {
         $loader->load(__DIR__.'/config/config_'.$this->getEnvironment().'.yml');
     }
+
+    public function getCacheDir()
+    {
+        if (getenv('SYMFONY_CACHE_DIR')) {
+            return getenv('SYMFONY_CACHE_DIR');
+        }
+
+        return parent::getCacheDir();
+    }
+
+    public function getLogDir()
+    {
+        if (getenv('SYMFONY_LOG_DIR')) {
+            return getenv('SYMFONY_LOG_DIR');
+        }
+
+        return parent::getLogDir();
+    }
 }
